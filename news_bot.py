@@ -48,7 +48,7 @@ import smtplib
 from email.mime.text import MIMEText
 import os # Make sure os is imported
 
-EMAIL = os.getenv('EMAIL') # Get sender email from GitHub secret
+EMAIL = os.getenv('EMAIL_SENDER') # Get sender email from GitHub secret
 PASSWORD = os.getenv('GMAIL_APP_PASSWORD') # Get App Password from GitHub secret
 
 msg = MIMEText(news_report)
@@ -65,5 +65,5 @@ print("Email sent")
 import os
 
 NEWS_API_KEY = os.getenv("NEWS_API_KEY")
-EMAIL = os.getenv("EMAIL")
-PASSWORD = os.getenv("EMAIL_PASSWORD")
+EMAIL = os.getenv("EMAIL_SENDER")
+PASSWORD = os.getenv("GMAIL_APP_PASSWORD")
