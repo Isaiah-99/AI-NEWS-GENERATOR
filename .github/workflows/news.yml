@@ -1,18 +1,29 @@
-name: Daily AI News
+name: Daily AI News Email
 
 on:
   schedule:
-    - cron: "0 8 * * *"
+    - cron: "0 7 * * *"  # Runs daily at 7AM UTC
+  workflow_dispatch:  # allows manual run
 
 jobs:
   run-script:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v3
+      - name: Checkout repo
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.10"
 
       - name: Install dependencies
         run: pip install -r requirements.txt
 
       - name: Run script
+        env:
+          NEWS_API_KEY: ${{ secrets.NEWS_API_KEY }}
+          EMAIL: ${{ secrets.EMAIL }}
+          EMAIL_PASSWORD: ${{ secrets.EMAIL_PASSWORD }}
         run: python news_bot.py
