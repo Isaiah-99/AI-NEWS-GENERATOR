@@ -46,10 +46,10 @@ for article in articles[:5]:
 
 import smtplib
 from email.mime.text import MIMEText
-from google.colab import userdata
+import os # Make sure os is imported
 
-EMAIL = "Isaiahakinlabi99@gmail.com"
-PASSWORD = userdata.get('GMAIL_APP_PASSWORD') # Retrieve from Colab Secrets
+EMAIL = os.getenv('EMAIL') # Get sender email from GitHub secret
+PASSWORD = os.getenv('GMAIL_APP_PASSWORD') # Get App Password from GitHub secret
 
 msg = MIMEText(news_report)
 msg["Subject"] = "Daily News Summary"
@@ -62,7 +62,6 @@ with smtplib.SMTP_SSL("smtp.gmail.com", 465) as server:
     server.send_message(msg)
 
 print("Email sent")
-
 import os
 
 NEWS_API_KEY = os.getenv("NEWS_API_KEY")
