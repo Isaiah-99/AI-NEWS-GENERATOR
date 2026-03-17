@@ -7,8 +7,6 @@ Original file is located at
     https://colab.research.google.com/drive/1zj3NeQkLAs3y8ApEOYciE9DkTS4arCWb
 """
 
-!pip install requests openai
-
 import requests
 
 API_KEY = "4ae008a61a494589b08ca76bc9afa71f"
