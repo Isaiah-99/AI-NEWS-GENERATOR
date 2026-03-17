@@ -20,7 +20,6 @@ articles = data["articles"]
 for article in articles[:5]:
     print(article["title"], article["description"])
 
-!pip install transformers
 
 from transformers import pipeline, AutoTokenizer, AutoModelForSeq2SeqLM
 
