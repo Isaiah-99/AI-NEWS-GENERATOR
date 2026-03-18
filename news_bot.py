@@ -21,11 +21,12 @@ for article in articles[:5]:
     print(article["title"], article["description"])
 
 
-from transformers import pipeline, AutoTokenizer, AutoModelForSeq2SeqLM
+from transformers import pipeline
 
-# Initialize the summarization pipeline with a specific model
-model_name = "sshleifer/distilbart-cnn-12-6"
-summarizer = pipeline("summarization", model="sshleifer/distilbart-cnn-12-6")
+summarizer = pipeline(
+    "summarization",
+    model="sshleifer/distilbart-cnn-12-6"
+)
 
 def clean_summary(text):
     # Access 'generated_text' directly from the result of the pipeline for text-generation task
