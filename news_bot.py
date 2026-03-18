@@ -25,7 +25,7 @@ from transformers import pipeline, AutoTokenizer, AutoModelForSeq2SeqLM
 
 # Initialize the summarization pipeline with a specific model
 model_name = "sshleifer/distilbart-cnn-12-6"
-summarizer = pipeline("text-generation", model=model_name, max_length=150, min_length=30, do_sample=False)
+summarizer = pipeline("summarization", model="sshleifer/distilbart-cnn-12-6")
 
 def clean_summary(text):
     # Access 'generated_text' directly from the result of the pipeline for text-generation task
