@@ -86,12 +86,12 @@ html_content = f"""
 msg = MIMEText(html_content, "html")
 msg["Subject"] = "Daily News Summary"
 msg["From"] = EMAIL
-msg["To"] = ", ".join(RECIPIENTS)
+msg["To"] = ", ".join(recipients)
 
 # Use SMTP_SSL for port 465 to establish an SSL-wrapped connection
 with smtplib.SMTP_SSL("smtp.gmail.com", 465) as server:
     server.login(EMAIL, PASSWORD)
-    server.sendmail(EMAIL, RECIPIENTS, msg.as_string())
+    server.sendmail(EMAIL, recipients, msg.as_string())
 
 print("Email sent")
 import os
