@@ -71,7 +71,7 @@ from datetime import datetime
 today = datetime.now().strftime("%B %d, %Y")
 
 html_content = f"""
-<h1 style="text-align:center;">🧠 Daily AI News Brief</h1>
+<h1 style="text-align:center;">🧠 Daily News Brief</h1>
 <p style="text-align:center; color:gray;">{today}</p>
 <hr>
 """ + html_content
