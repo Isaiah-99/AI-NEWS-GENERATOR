@@ -27,21 +27,35 @@ from transformers import pipeline, AutoTokenizer, AutoModelForSeq2SeqLM
 model_name = "sshleifer/distilbart-cnn-12-6"
 summarizer = pipeline("text-generation", model=model_name, max_length=150, min_length=30, do_sample=False)
 
-def summarize_news(text):
+def clean_summary(text):
     # Access 'generated_text' directly from the result of the pipeline for text-generation task
-    return summarizer(text[:1000])[0]['generated_text']
+    prompt = f"""
+    Summarize this news clearly and professionally in 3-4 sentences.
+    Remove repetition and make it easy to read:
 
-news_report = ""
+    {text}
+    """
+    return summarizer(prompt[:1000])[0]['summary_text']
 
-for article in articles[:5]:
-    summary = summarize_news(article["description"] or article["title"])
+html_content = ""
 
-    news_report += f"""
-    Title: {article['title']}
-    Summary: {summary}
-    Link: {article['url']}
+for article in articles:
+    summary = clean_summary(article["description"] or article["title"])
 
-    -----------------------
+    html_content += f"""
+    <div style="margin-bottom:20px;">
+        <h2 style="color:#2c3e50;">📰 {article['title']}</h2>
+        
+        <p style="font-size:16px; color:#555;">
+            {summary}
+        </p>
+        
+        <a href="{article['url']}" 
+           style="color:#1a73e8; font-weight:bold;">
+           Read full article →
+        </a>
+    </div>
+    <hr>
     """
 
 import smtplib
@@ -51,7 +65,17 @@ import os # Make sure os is imported
 EMAIL = os.getenv('EMAIL_SENDER') # Get sender email from GitHub secret
 PASSWORD = os.getenv('GMAIL_APP_PASSWORD') # Get App Password from GitHub secret
 
-msg = MIMEText(news_report)
+from datetime import datetime
+
+today = datetime.now().strftime("%B %d, %Y")
+
+html_content = f"""
+<h1 style="text-align:center;">🧠 Daily AI News Brief</h1>
+<p style="text-align:center; color:gray;">{today}</p>
+<hr>
+""" + html_content
+
+msg = MIMEText(html_content, "html")
 msg["Subject"] = "Daily News Summary"
 msg["From"] = EMAIL
 msg["To"] = EMAIL
