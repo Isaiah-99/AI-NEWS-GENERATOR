@@ -20,3 +20,4 @@ jobs:
         env:
           EMAIL_SENDER: ${{ secrets.EMAIL_SENDER }} # Pass your sender email secret
           GMAIL_APP_PASSWORD: ${{ secrets.GMAIL_APP_PASSWORD }} # Pass your App Password secret
+          RECIPIENTS: ${{ secrets.RECIPIENTS }}
