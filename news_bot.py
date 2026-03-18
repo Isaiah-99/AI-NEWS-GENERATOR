@@ -92,6 +92,4 @@ import os
 NEWS_API_KEY = os.getenv("NEWS_API_KEY")
 EMAIL = os.getenv("EMAIL_SENDER")
 PASSWORD = os.getenv("GMAIL_APP_PASSWORD")
-
-recipients = 
-os.getenv("RECIPIENTS").split(",")
+recipients = os.getenv("RECIPIENTS").split(",")
