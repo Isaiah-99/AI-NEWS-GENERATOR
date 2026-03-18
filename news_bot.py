@@ -84,7 +84,7 @@ msg["To"] = ", ".join(recipients)
 # Use SMTP_SSL for port 465 to establish an SSL-wrapped connection
 with smtplib.SMTP_SSL("smtp.gmail.com", 465) as server:
     server.login(EMAIL, PASSWORD)
-    server.send_message(msg)
+    server.sendmail(EMAIL, recipients, msg.as_string())
 
 print("Email sent")
 import os
@@ -92,4 +92,6 @@ import os
 NEWS_API_KEY = os.getenv("NEWS_API_KEY")
 EMAIL = os.getenv("EMAIL_SENDER")
 PASSWORD = os.getenv("GMAIL_APP_PASSWORD")
-recipients = os.getenv("RECIPIENTS").split(",")
+
+recipients = 
+os.getenv("RECIPIENTS").split(",")
