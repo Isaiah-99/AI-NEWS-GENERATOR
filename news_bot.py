@@ -63,6 +63,13 @@ import smtplib
 from email.mime.text import MIMEText
 import os # Make sure os is imported
 
+recipients_env = os.getenv("RECIPIENTS")
+
+if recipients_env: 
+    recipients = recipients_env.split(",")
+else:
+    recipients = []
+
 EMAIL = os.getenv('EMAIL_SENDER') # Get sender email from GitHub secret
 PASSWORD = os.getenv('GMAIL_APP_PASSWORD') # Get App Password from GitHub secret
 
@@ -79,7 +86,7 @@ html_content = f"""
 msg = MIMEText(html_content, "html")
 msg["Subject"] = "Daily News Summary"
 msg["From"] = EMAIL
-msg["To"] = ",".join(RECIPIENTS)
+msg["To"] = ", ".join(RECIPIENTS)
 
 # Use SMTP_SSL for port 465 to establish an SSL-wrapped connection
 with smtplib.SMTP_SSL("smtp.gmail.com", 465) as server:
